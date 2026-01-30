@@ -3,937 +3,275 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hyperlocal Social — Profile Wireframe</title>
+  <title>Maoney — Mobile Profile</title>
+
+  <!-- Material Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,0,0"
+    rel="stylesheet"
+  />
+
   <style>
     :root{
       --bg:#0b0c10;
-      --panel:#121420;
-      --panel2:#0f111a;
+      --card:#121420;
+      --line:rgba(255,255,255,.1);
       --text:#e7e7ee;
       --muted:#a7a9b7;
-      --line:rgba(255,255,255,.10);
-      --chip:rgba(255,255,255,.08);
-      --chip2:rgba(255,255,255,.12);
-      --cta:#2f6df6;
+      --primary:#2f6df6;
       --danger:#e24d4d;
-      --ok:#25c76f;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius:16px;
-      --radius2:22px;
-      --max:1200px;
-      --gap:16px;
+      --radius:18px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
-      font: 14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:var(--bg);
       color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(47,109,246,.20), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(37,199,111,.12), transparent 55%),
-        var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto;
     }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:24px 16px 60px}
+
+    .mi{
+      font-family:"Material Symbols Rounded";
+      font-size:22px;
+      vertical-align:middle;
+    }
+
+    /* Top bar */
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; margin-bottom:18px;
-    }
-    .brand{
-      display:flex; gap:10px; align-items:center;
-      padding:10px 12px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.03);
-    }
-    .dot{width:10px; height:10px; border-radius:50%; background:var(--cta); box-shadow:0 0 0 6px rgba(47,109,246,.15)}
-    .search{
-      flex:1; max-width:520px;
-      display:flex; align-items:center; gap:10px;
-      border:1px solid var(--line); border-radius:999px;
-      padding:10px 12px; background:rgba(255,255,255,.03);
-      color:var(--muted);
-    }
-    .search span{opacity:.7}
-    .pill{
-      border:1px solid var(--line); background:rgba(255,255,255,.03);
-      padding:10px 12px; border-radius:999px; color:var(--muted);
-      white-space:nowrap;
-    }
-
-    /* Layout */
-    .grid{
-      display:grid;
-      grid-template-columns: 320px 1fr 320px;
-      gap: var(--gap);
-      align-items:start;
-    }
-    @media (max-width: 1024px){
-      .grid{grid-template-columns: 320px 1fr; }
-      .right{display:none;}
-    }
-    @media (max-width: 800px){
-      .grid{grid-template-columns: 1fr;}
-      .left{order:1;}
-      .main{order:3;}
-      .right{display:block; order:4;}
-    }
-
-    /* Cards */
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid var(--line);
-      border-radius:var(--radius2);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .card .hd{
-      padding:14px 16px;
-      display:flex; align-items:center; justify-content:space-between;
-      border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-    }
-    .card .hd h3{margin:0; font-size:13px; letter-spacing:.2px; color:var(--muted); font-weight:600}
-    .card .bd{padding:16px}
-
-    /* Profile header block */
-    .profileHero{
-      padding:16px;
-      display:grid;
-      grid-template-columns: 76px 1fr;
-      gap:12px;
+      position:sticky;
+      top:0;
+      z-index:10;
+      display:flex;
       align-items:center;
+      gap:12px;
+      padding:14px;
+      background:rgba(11,12,16,.9);
+      border-bottom:1px solid var(--line);
     }
-    .avatar{
-      width:76px; height:76px; border-radius:22px;
-      background:linear-gradient(135deg, rgba(47,109,246,.35), rgba(37,199,111,.20));
-      border:1px dashed rgba(255,255,255,.20);
-      display:flex; align-items:center; justify-content:center;
-      color:rgba(255,255,255,.75);
-      font-weight:700;
-    }
-    .heroMeta{min-width:0}
-    .heroMeta .row{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-    .name{font-size:18px; font-weight:750; margin:0}
-    .handle{color:var(--muted); font-weight:600}
-    .status{
-      margin-top:6px;
-      color:rgba(255,255,255,.85);
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      padding:8px 10px; border-radius:12px;
-    }
-    .metaLine{
-      margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; color:var(--muted);
-    }
-    .badge{
-      font-size:12px; padding:6px 10px; border-radius:999px;
-      border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--muted);
-    }
-    .badge.ok{border-color:rgba(37,199,111,.35); color:rgba(37,199,111,.95); background:rgba(37,199,111,.08)}
-    .badge.loc{border-color:rgba(47,109,246,.35); color:rgba(47,109,246,.95); background:rgba(47,109,246,.08)}
-    .heroActions{
-      margin-top:12px;
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:8px;
-      padding:10px 12px; border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--text); text-decoration:none;
-      font-weight:650;
-      cursor:pointer;
-      user-select:none;
-    }
-    .btn.primary{background:rgba(47,109,246,.18); border-color:rgba(47,109,246,.45)}
-    .btn.ghost{color:var(--muted)}
-    .btn.danger{background:rgba(226,77,77,.12); border-color:rgba(226,77,77,.40); color:rgba(226,77,77,.95)}
-    .btn.small{padding:8px 10px; border-radius:12px; font-weight:650; font-size:13px}
 
-    /* Left rail blocks */
-    .stats{
-      display:grid; grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-      margin-top:12px;
+    .topbar .title{
+      font-weight:800;
+      flex:1;
     }
-    .stat{
-      padding:12px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(255,255,255,.02);
+
+    /* Profile header */
+    .profile{
+      padding:18px;
       text-align:center;
     }
-    .stat .n{font-size:18px; font-weight:800}
-    .stat .l{font-size:12px; color:var(--muted)}
 
-    .kv{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:10px;
-    }
-    .kv .item{
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:12px;
-      background:rgba(255,255,255,.02);
-    }
-    .kv .k{font-size:11px; letter-spacing:.2px; color:var(--muted); text-transform:uppercase}
-    .kv .v{margin-top:6px; color:rgba(255,255,255,.88)}
-    .divider{height:1px; background:var(--line); margin:14px 0}
-
-    /* Tabs (CSS-only) */
-    .tabs{
-      position:sticky;
-      top:10px;
-      z-index:5;
-      backdrop-filter: blur(10px);
-      background:rgba(11,12,16,.55);
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:6px;
+    .avatar{
+      width:96px;
+      height:96px;
+      border-radius:28px;
+      margin:0 auto 12px;
+      background:linear-gradient(135deg,#2f6df6,#25c76f);
       display:flex;
-      gap:6px;
-      overflow:auto;
-      -webkit-overflow-scrolling:touch;
+      align-items:center;
+      justify-content:center;
     }
-    .tabs input{display:none}
-    .tabLabel{
-      padding:10px 12px;
+
+    .avatar .mi{font-size:48px}
+
+    .name{font-size:20px;font-weight:800}
+    .handle{color:var(--muted)}
+    .badges{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
+    .badge{
+      padding:6px 10px;
       border-radius:999px;
-      border:1px solid transparent;
-      color:var(--muted);
-      font-weight:700;
-      cursor:pointer;
-      white-space:nowrap;
-      user-select:none;
-    }
-    #t_overview:checked ~ .tabs label[for="t_overview"],
-    #t_posts:checked ~ .tabs label[for="t_posts"],
-    #t_conns:checked ~ .tabs label[for="t_conns"],
-    #t_comms:checked ~ .tabs label[for="t_comms"]{
-      color:var(--text);
       background:rgba(255,255,255,.05);
-      border-color:var(--line);
+      border:1px solid var(--line);
+      font-size:12px;
+      display:flex;
+      align-items:center;
+      gap:6px;
     }
 
-    .tabPanels{margin-top:12px}
-    .panel{display:none}
-    #t_overview:checked ~ .tabPanels .p_overview{display:block}
-    #t_posts:checked ~ .tabPanels .p_posts{display:block}
-    #t_conns:checked ~ .tabPanels .p_conns{display:block}
-    #t_comms:checked ~ .tabPanels .p_comms{display:block}
-
-    /* Content blocks */
-    .sectionTitle{
-      display:flex; justify-content:space-between; align-items:center;
-      margin:0 0 10px; gap:10px;
+    .status{
+      margin:14px 0;
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
     }
-    .sectionTitle h2{margin:0; font-size:15px}
-    .subtle{color:var(--muted); font-size:12px}
-    .chips{display:flex; flex-wrap:wrap; gap:8px}
-    .chip{
+
+    /* Sticky actions */
+    .actions{
+      position:sticky;
+      top:64px;
+      z-index:9;
+      display:flex;
+      gap:10px;
+      padding:12px;
+      background:rgba(11,12,16,.95);
+    }
+
+    .btn{
+      flex:1;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .btn.primary{
+      background:rgba(47,109,246,.25);
+      border-color:rgba(47,109,246,.5);
+    }
+
+    .btn.danger{
+      background:rgba(226,77,77,.2);
+      border-color:rgba(226,77,77,.5);
+    }
+
+    /* Sections */
+    .section{
+      margin:16px;
+      padding:16px;
+      background:var(--card);
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+    }
+
+    .section h3{
+      margin:0 0 12px;
+      font-size:14px;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .tag{
       padding:7px 10px;
       border-radius:999px;
+      background:rgba(255,255,255,.06);
       border:1px solid var(--line);
-      background:var(--chip);
-      color:rgba(255,255,255,.88);
-      font-weight:650;
       font-size:13px;
-    }
-    .chip:hover{background:var(--chip2)}
-    .cat{margin:12px 0}
-    .cat h4{
-      margin:0 0 8px;
-      font-size:12px;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.25px;
     }
 
     /* Media grid */
-    .mediaGrid{
+    .grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns:repeat(2,1fr);
       gap:10px;
     }
-    @media (max-width: 520px){
-      .mediaGrid{grid-template-columns: repeat(2, 1fr)}
-    }
+
     .media{
-      aspect-ratio: 1 / 1;
-      border-radius:18px;
-      border:1px dashed rgba(255,255,255,.18);
-      background:rgba(255,255,255,.03);
-      display:flex; align-items:center; justify-content:center;
-      color:var(--muted);
-      font-weight:700;
-    }
-
-    /* Lists */
-    .list{display:grid; gap:10px}
-    .rowCard{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:12px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(255,255,255,.02);
-    }
-    .rowLeft{
-      display:flex; align-items:center; gap:10px;
-      min-width:0;
-    }
-    .mini{
-      width:42px; height:42px; border-radius:14px;
-      border:1px dashed rgba(255,255,255,.18);
-      background:rgba(255,255,255,.03);
-      display:flex; align-items:center; justify-content:center;
-      color:var(--muted); font-weight:800;
-      flex:0 0 auto;
-    }
-    .rowText{min-width:0}
-    .rowText .title{font-weight:750; margin:0; font-size:14px}
-    .rowText .meta{margin:3px 0 0; color:var(--muted); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:360px}
-    .rowActions{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
-    .hint{
-      border-top:1px solid var(--line);
-      padding:12px 16px;
-      color:var(--muted);
-      font-size:12px;
-      background:rgba(255,255,255,.015);
-    }
-
-    /* Right rail modules */
-    .commonGround{
-      display:grid; gap:10px;
-    }
-    .callout{
-      padding:12px;
-      border-radius:18px;
-      border:1px solid rgba(47,109,246,.35);
-      background:rgba(47,109,246,.08);
-      color:rgba(255,255,255,.9);
-    }
-    .callout strong{display:block; margin-bottom:6px}
-    .mutedBlock{
-      padding:12px; border-radius:18px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
+      aspect-ratio:1/1;
+      border-radius:14px;
+      border:1px dashed var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
       color:var(--muted);
     }
 
-    /* Footer */
-    .foot{
-      margin-top:20px;
-      color:var(--muted);
-      font-size:12px;
-      text-align:center;
-    }
-
-    /* Demo state switch (optional wireframe helper) */
-    .stateBar{
-      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
-      margin-top:10px;
-    }
-    .stateBar .pill{cursor:pointer}
+    /* Footer spacing */
+    .spacer{height:40px}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- Topbar (wireframe only) -->
-    <div class="topbar">
-      <div class="brand">
-        <div class="dot"></div>
-        <div style="font-weight:800;">Hyperlocal</div>
-        <div style="color:var(--muted); font-weight:650;">/ Profile</div>
-      </div>
-      <div class="search" aria-label="Search">
-        <span>⌕</span>
-        <div>Search people, tags, communities…</div>
-      </div>
-      <div class="pill">Nearby • 3–7 mi</div>
+
+  <!-- Top -->
+  <div class="topbar">
+    <span class="mi">arrow_back</span>
+    <div class="title">Profile</div>
+    <span class="mi">more_vert</span>
+  </div>
+
+  <!-- Profile -->
+  <div class="profile">
+    <div class="avatar">
+      <span class="mi">person</span>
+    </div>
+    <div class="name">Alex Ventura</div>
+    <div class="handle">@alexv</div>
+
+    <div class="badges">
+      <div class="badge"><span class="mi">verified</span>Verified</div>
+      <div class="badge"><span class="mi">near_me</span>~2–5 mi</div>
+      <div class="badge"><span class="mi">location_city</span>San Francisco</div>
     </div>
 
-    <div class="grid">
-      <!-- LEFT RAIL -->
-      <aside class="left">
-        <div class="card">
-          <div class="profileHero">
-            <div class="avatar">AV</div>
-            <div class="heroMeta">
-              <div class="row">
-                <p class="name">Alex Ventura</p>
-                <span class="badge ok">Verified</span>
-              </div>
-              <div class="row">
-                <span class="handle">@alexv</span>
-                <span class="badge loc">~2–5 miles</span>
-                <span class="badge">San Francisco</span>
-              </div>
-              <div class="status">Status: Open to meet for a coffee + hike this weekend.</div>
-
-              <!-- Connection actions (choose the set you want; this shows "Not Connected" state) -->
-              <div class="heroActions">
-                <a class="btn primary" href="#" role="button">Connect</a>
-                <a class="btn ghost" href="#" role="button">Mute</a>
-                <a class="btn danger" href="#" role="button">Block</a>
-              </div>
-
-              <!-- Optional wireframe helper: show states you might implement -->
-              <div class="stateBar" aria-label="Connection state examples (wireframe)">
-                <span class="pill" title="Not Connected state">Not Connected</span>
-                <span class="pill" title="Request Sent state">Request Sent</span>
-                <span class="pill" title="Request Received state">Request Received</span>
-                <span class="pill" title="Connected state">Connected</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="bd">
-            <div class="stats">
-              <div class="stat"><div class="n">42</div><div class="l">Posts</div></div>
-              <div class="stat"><div class="n">186</div><div class="l">Connections</div></div>
-              <div class="stat"><div class="n">9</div><div class="l">Communities</div></div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="kv">
-              <div class="item">
-                <div class="k">Bio</div>
-                <div class="v">Product designer who loves outdoor adventures, film photography, and building community IRL.</div>
-              </div>
-              <div class="item">
-                <div class="k">Ethnicity</div>
-                <div class="v">Optional / privacy-controlled</div>
-              </div>
-              <div class="item">
-                <div class="k">Politics</div>
-                <div class="v">Optional / privacy-controlled</div>
-              </div>
-              <div class="item">
-                <div class="k">Location</div>
-                <div class="v">City shown • Distance approximate • Exact hidden</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hint">
-            Wireframe note: This left rail stays stable while the main area switches tabs.
-          </div>
-        </div>
-      </aside>
-
-      <!-- MAIN -->
-      <main class="main">
-        <!-- CSS-only tabs -->
-        <input type="radio" name="tabs" id="t_overview" checked>
-        <input type="radio" name="tabs" id="t_posts">
-        <input type="radio" name="tabs" id="t_conns">
-        <input type="radio" name="tabs" id="t_comms">
-
-        <div class="tabs" role="tablist" aria-label="Profile tabs">
-          <label class="tabLabel" for="t_overview" role="tab">Overview</label>
-          <label class="tabLabel" for="t_posts" role="tab">Posts</label>
-          <label class="tabLabel" for="t_conns" role="tab">Connections</label>
-          <label class="tabLabel" for="t_comms" role="tab">Communities</label>
-        </div>
-
-        <div class="tabPanels">
-          <!-- OVERVIEW PANEL -->
-          <section class="panel p_overview">
-            <!-- My Profile (structured) -->
-            <div class="card">
-              <div class="hd">
-                <h3>My Profile</h3>
-                <a class="btn small ghost" href="#" role="button">Edit</a>
-              </div>
-              <div class="bd">
-                <div class="kv">
-                  <div class="item">
-                    <div class="k">Handle</div>
-                    <div class="v">@alexv</div>
-                  </div>
-                  <div class="item">
-                    <div class="k">Name</div>
-                    <div class="v">Alex Ventura</div>
-                  </div>
-                  <div class="item">
-                    <div class="k">Pic / Videos</div>
-                    <div class="v">Profile photo + optional looping intro video</div>
-                  </div>
-                  <div class="item">
-                    <div class="k">Status</div>
-                    <div class="v">Open to meet for a coffee + hike this weekend.</div>
-                  </div>
-                  <div class="item">
-                    <div class="k">City</div>
-                    <div class="v">San Francisco</div>
-                  </div>
-                  <div class="item">
-                    <div class="k">Ethnicity</div>
-                    <div class="v">Optional / Connections-only</div>
-                  </div>
-                  <div class="item">
-                    <div class="k">Location</div>
-                    <div class="v">Approx. distance bucket (privacy default)</div>
-                  </div>
-                  <div class="item">
-                    <div class="k">Politics</div>
-                    <div class="v">Optional / Hidden</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <!-- My Tribes -->
-            <div class="card">
-              <div class="hd">
-                <h3>My Tribes (#Tags)</h3>
-                <a class="btn small ghost" href="#" role="button">Manage Tags</a>
-              </div>
-              <div class="bd">
-                <p class="subtle" style="margin-top:0;">
-                  Tags are clickable and can launch a “people nearby with #tag” search.
-                </p>
-
-                <div class="cat">
-                  <h4>Nationalities</h4>
-                  <div class="chips">
-                    <span class="chip">#American</span>
-                    <span class="chip">#Mexican</span>
-                  </div>
-                </div>
-
-                <div class="cat">
-                  <h4>Languages</h4>
-                  <div class="chips">
-                    <span class="chip">#English</span>
-                    <span class="chip">#Spanish</span>
-                  </div>
-                </div>
-
-                <div class="cat">
-                  <h4>Profession</h4>
-                  <div class="chips">
-                    <span class="chip">#ProductDesign</span>
-                    <span class="chip">#UX</span>
-                  </div>
-                </div>
-
-                <div class="cat">
-                  <h4>Interests / Passions</h4>
-                  <div class="chips">
-                    <span class="chip">#Hiking</span>
-                    <span class="chip">#FilmPhotography</span>
-                    <span class="chip">#Coffee</span>
-                    <span class="chip">#Startups</span>
-                    <span class="chip">#Running</span>
-                    <span class="chip">#BoardGames</span>
-                  </div>
-                </div>
-
-                <div class="cat">
-                  <h4>School</h4>
-                  <div class="chips">
-                    <span class="chip">#UCSystem</span>
-                    <span class="chip">#Alumni</span>
-                  </div>
-                </div>
-
-                <div class="cat">
-                  <h4>Religion</h4>
-                  <div class="chips">
-                    <span class="chip">#Optional</span>
-                  </div>
-                </div>
-
-                <div class="cat">
-                  <h4>Sports</h4>
-                  <div class="chips">
-                    <span class="chip">#Soccer</span>
-                    <span class="chip">#TrailRunning</span>
-                  </div>
-                </div>
-
-                <div class="cat">
-                  <h4>Causes</h4>
-                  <div class="chips">
-                    <span class="chip">#Sustainability</span>
-                    <span class="chip">#CommunityBuilding</span>
-                  </div>
-                </div>
-
-                <div class="cat">
-                  <h4>Fraternities / Sororities</h4>
-                  <div class="chips">
-                    <span class="chip">#Optional</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <!-- My Links -->
-            <div class="card">
-              <div class="hd">
-                <h3>My Links</h3>
-                <a class="btn small ghost" href="#" role="button">Edit Links</a>
-              </div>
-              <div class="bd">
-                <div class="list">
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">🌐</div>
-                      <div class="rowText">
-                        <p class="title">Website</p>
-                        <p class="meta">yourdomain.com</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Open</a>
-                    </div>
-                  </div>
-
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">in</div>
-                      <div class="rowText">
-                        <p class="title">LinkedIn</p>
-                        <p class="meta">linkedin.com/in/username</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Open</a>
-                    </div>
-                  </div>
-
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">◎</div>
-                      <div class="rowText">
-                        <p class="title">Instagram</p>
-                        <p class="meta">@username</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Open</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <!-- Featured Posts -->
-            <div class="card">
-              <div class="hd">
-                <h3>My Posts (Featured)</h3>
-                <label class="btn small ghost" for="t_posts" role="button">View All</label>
-              </div>
-              <div class="bd">
-                <div class="mediaGrid" aria-label="Featured posts grid">
-                  <div class="media">IMG</div>
-                  <div class="media">VID</div>
-                  <div class="media">IMG</div>
-                  <div class="media">IMG</div>
-                  <div class="media">VID</div>
-                  <div class="media">IMG</div>
-                </div>
-              </div>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <!-- Communities preview -->
-            <div class="card">
-              <div class="hd">
-                <h3>My Communities</h3>
-                <label class="btn small ghost" for="t_comms" role="button">See All</label>
-              </div>
-              <div class="bd">
-                <div class="list">
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">🏃</div>
-                      <div class="rowText">
-                        <p class="title">Trail Runners SF</p>
-                        <p class="meta">Public group • 1.2k members</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small primary" href="#" role="button">View</a>
-                    </div>
-                  </div>
-
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">📷</div>
-                      <div class="rowText">
-                        <p class="title">Analog Photo Walks</p>
-                        <p class="meta">Private group • Invite only</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Request</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <!-- Connections preview -->
-            <div class="card">
-              <div class="hd">
-                <h3>My Connections</h3>
-                <label class="btn small ghost" for="t_conns" role="button">Browse</label>
-              </div>
-              <div class="bd">
-                <div class="list">
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">P</div>
-                      <div class="rowText">
-                        <p class="title">People</p>
-                        <p class="meta">186 connections • 12 mutual</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Open</a>
-                    </div>
-                  </div>
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">O</div>
-                      <div class="rowText">
-                        <p class="title">Organizations</p>
-                        <p class="meta">7 memberships • 2 admin roles</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Open</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- POSTS PANEL -->
-          <section class="panel p_posts">
-            <div class="card">
-              <div class="hd">
-                <h3>My Posts</h3>
-                <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                  <a class="btn small" href="#" role="button">All</a>
-                  <a class="btn small ghost" href="#" role="button">Pics</a>
-                  <a class="btn small ghost" href="#" role="button">Videos</a>
-                </div>
-              </div>
-              <div class="bd">
-                <div class="mediaGrid" aria-label="Posts grid">
-                  <div class="media">IMG</div><div class="media">IMG</div><div class="media">VID</div>
-                  <div class="media">IMG</div><div class="media">VID</div><div class="media">IMG</div>
-                  <div class="media">IMG</div><div class="media">IMG</div><div class="media">IMG</div>
-                  <div class="media">VID</div><div class="media">IMG</div><div class="media">IMG</div>
-                </div>
-              </div>
-              <div class="hint">Wireframe note: posts can be filtered + sorted; privacy levels may hide some items from viewers.</div>
-            </div>
-          </section>
-
-          <!-- CONNECTIONS PANEL -->
-          <section class="panel p_conns">
-            <div class="card">
-              <div class="hd">
-                <h3>My Connections</h3>
-                <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                  <a class="btn small" href="#" role="button">People</a>
-                  <a class="btn small ghost" href="#" role="button">Organizations</a>
-                </div>
-              </div>
-              <div class="bd">
-                <div class="list">
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">JV</div>
-                      <div class="rowText">
-                        <p class="title">Jordan Vega</p>
-                        <p class="meta">~3–6 miles • #Hiking #Startups • 4 mutual</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Message</a>
-                      <a class="btn small ghost" href="#" role="button">Mute</a>
-                      <a class="btn small danger" href="#" role="button">Block</a>
-                    </div>
-                  </div>
-
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">KS</div>
-                      <div class="rowText">
-                        <p class="title">Kai Stone</p>
-                        <p class="meta">~1–2 miles • #Photography #Coffee • 1 mutual</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Message</a>
-                      <a class="btn small ghost" href="#" role="button">Mute</a>
-                      <a class="btn small danger" href="#" role="button">Block</a>
-                    </div>
-                  </div>
-
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">++</div>
-                      <div class="rowText">
-                        <p class="title">Show more connections</p>
-                        <p class="meta">Pagination / infinite scroll</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Load</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="hint">Wireframe note: viewer privacy may hide full lists; allow “connections visible to: public / connections / hidden”.</div>
-            </div>
-          </section>
-
-          <!-- COMMUNITIES PANEL -->
-          <section class="panel p_comms">
-            <div class="card">
-              <div class="hd">
-                <h3>My Communities</h3>
-                <a class="btn small ghost" href="#" role="button">Manage</a>
-              </div>
-              <div class="bd">
-                <div class="list">
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">🏢</div>
-                      <div class="rowText">
-                        <p class="title">SF Design Association</p>
-                        <p class="meta">Association • Public • Events monthly</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small primary" href="#" role="button">View</a>
-                    </div>
-                  </div>
-
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">🧠</div>
-                      <div class="rowText">
-                        <p class="title">AI Builders (Bay)</p>
-                        <p class="meta">Group • Public • 4.8k members</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Join</a>
-                    </div>
-                  </div>
-
-                  <div class="rowCard">
-                    <div class="rowLeft">
-                      <div class="mini">🔒</div>
-                      <div class="rowText">
-                        <p class="title">Sunday Hike Crew</p>
-                        <p class="meta">Group • Private • Discoverable</p>
-                      </div>
-                    </div>
-                    <div class="rowActions">
-                      <a class="btn small" href="#" role="button">Request</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="hint">Wireframe note: private communities may be hidden unless viewer is a member or owner allows discoverability.</div>
-            </div>
-          </section>
-        </div>
-      </main>
-
-      <!-- RIGHT RAIL -->
-      <aside class="right">
-        <div class="card">
-          <div class="hd">
-            <h3>Common Ground (AI)</h3>
-            <a class="btn small ghost" href="#" role="button">Why?</a>
-          </div>
-          <div class="bd commonGround">
-            <div class="callout">
-              <strong>You both share:</strong>
-              <div class="chips" style="margin-top:8px;">
-                <span class="chip">#Hiking</span>
-                <span class="chip">#Coffee</span>
-                <span class="chip">#ProductDesign</span>
-              </div>
-            </div>
-            <div class="mutedBlock">
-              <div style="font-weight:750; color:var(--text); margin-bottom:6px;">Suggested next step</div>
-              <div>Send a connect request mentioning a shared tag or join a shared community.</div>
-              <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
-                <a class="btn small primary" href="#" role="button">Connect</a>
-                <a class="btn small" href="#" role="button">Find more nearby</a>
-              </div>
-            </div>
-          </div>
-          <div class="hint">Wireframe note: Keep this lightweight and privacy-friendly.</div>
-        </div>
-
-        <div style="height:12px"></div>
-
-        <div class="card">
-          <div class="hd">
-            <h3>Suggested Nearby</h3>
-            <a class="btn small ghost" href="#" role="button">Refresh</a>
-          </div>
-          <div class="bd">
-            <div class="list">
-              <div class="rowCard">
-                <div class="rowLeft">
-                  <div class="mini">MP</div>
-                  <div class="rowText">
-                    <p class="title">Mina Park</p>
-                    <p class="meta">~1–3 miles • #Running #Design</p>
-                  </div>
-                </div>
-                <div class="rowActions">
-                  <a class="btn small primary" href="#" role="button">Connect</a>
-                </div>
-              </div>
-
-              <div class="rowCard">
-                <div class="rowLeft">
-                  <div class="mini">TA</div>
-                  <div class="rowText">
-                    <p class="title">Theo Alvarez</p>
-                    <p class="meta">~2–5 miles • #Photography #Startups</p>
-                  </div>
-                </div>
-                <div class="rowActions">
-                  <a class="btn small primary" href="#" role="button">Connect</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="hint">Wireframe note: suggestions should respect mute/block + location privacy.</div>
-        </div>
-      </aside>
-    </div>
-
-    <div class="foot">
-      Basic responsive wireframe • No JS required • Tabs are CSS-only • Replace placeholders with real data/components.
+    <div class="status">
+      Open to meet for coffee, hikes, and spontaneous adventures ☕🥾
     </div>
   </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="btn primary"><span class="mi">person_add</span>Connect</button>
+    <button class="btn"><span class="mi">chat</span>Message</button>
+    <button class="btn danger"><span class="mi">block</span></button>
+  </div>
+
+  <!-- About -->
+  <div class="section">
+    <h3><span class="mi">description</span>About</h3>
+    Product designer into outdoor adventures, analog photography, and building real-world community.
+  </div>
+
+  <!-- Tribes -->
+  <div class="section">
+    <h3><span class="mi">sell</span>Tribes</h3>
+    <div class="tags">
+      <span class="tag">#Hiking</span>
+      <span class="tag">#Design</span>
+      <span class="tag">#Photography</span>
+      <span class="tag">#Coffee</span>
+      <span class="tag">#Startups</span>
+      <span class="tag">#Spanish</span>
+    </div>
+  </div>
+
+  <!-- Posts -->
+  <div class="section">
+    <h3><span class="mi">collections</span>Posts</h3>
+    <div class="grid">
+      <div class="media"><span class="mi">image</span></div>
+      <div class="media"><span class="mi">play_circle</span></div>
+      <div class="media"><span class="mi">image</span></div>
+      <div class="media"><span class="mi">image</span></div>
+    </div>
+  </div>
+
+  <!-- Communities -->
+  <div class="section">
+    <h3><span class="mi">groups</span>Communities</h3>
+    <div class="tags">
+      <span class="tag">Trail Runners SF</span>
+      <span class="tag">AI Builders</span>
+      <span class="tag">Photo Walks</span>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
 </body>
 </html>
